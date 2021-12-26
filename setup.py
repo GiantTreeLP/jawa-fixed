@@ -4,14 +4,13 @@ from setuptools import setup, find_packages
 setup(
     name='jawa-fixed',
     packages=find_packages(),
-    version='2.3.0',
-    python_requires='>=3.6',
+    version='2.3.1-2',
+    python_requires='>=3.8',
     description='Doing fun stuff with JVM ClassFiles.',
     long_description=open('README.md', 'r').read(),
     long_description_content_type='text/markdown',
-    author='Tyler Kennedy',
-    author_email='tk@tkte.ch',
-    maintainer='Marvin K',
+    maintainer='GiantTree',
+    maintainer_email='gianttree@groundmc.net',
     url='https://github.com/GiantTreeLP/jawa-fixed',
     keywords=[
         'java',
@@ -48,7 +47,7 @@ setup(
             'ipython',
             'twine',
             'wheel',
-            'bumpversion',
+            'bump2version',
             'flake8'
         ]
     },

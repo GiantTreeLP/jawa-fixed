@@ -34,7 +34,7 @@ extensions = [
 ]
 
 # Google Analytics ID
-googleanalytics_id = 'UA-11145163-14'
+googleanalytics_id = ''
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -57,7 +57,7 @@ copyright = u'2019, Tyler Kennedy'
 # built documents.
 #
 # The full version, including alpha/beta/rc tags.
-release = '2.2.0'
+release = '2.3.1-2'
 # The short X.Y version.
 version = '.'.join(release.split('.')[:-1])
 
