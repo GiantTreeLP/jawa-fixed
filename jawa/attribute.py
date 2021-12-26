@@ -1,9 +1,9 @@
+import importlib
 import inspect
 import pkgutil
-import importlib
-from typing import IO, Callable, Iterator, Union, Dict, Any, Tuple
-from struct import unpack, pack
 from itertools import repeat
+from struct import unpack, pack
+from typing import IO, Callable, Iterator, Union, Dict, Any, Tuple
 
 from jawa.constants import UTF8
 from jawa.util.stream import BufferStreamReader
@@ -57,7 +57,7 @@ class UnknownAttribute(Attribute):
 
 
 class AttributeTable(object):
-    def __init__(self, cf, parent: Attribute=None):
+    def __init__(self, cf, parent: Attribute = None):
         #: The ClassFile that ultimately owns this AttributeTable.
         self.cf = cf
         #: The parent Attribute, if one exists.
@@ -130,7 +130,7 @@ class AttributeTable(object):
         self._table.append(attribute)
         return attribute
 
-    def find(self, *, name: str=None, f: Callable=None) -> Iterator[Any]:
+    def find(self, *, name: str = None, f: Callable = None) -> Iterator[Any]:
         for idx, attribute in enumerate(self._table):
             if name is not None:
                 # Optimization to filter solely on name without causing
@@ -172,8 +172,8 @@ def get_attribute_classes() -> Dict[str, Attribute]:
         classes = inspect.getmembers(
             importlib.import_module(name),
             lambda c: (
-                inspect.isclass(c) and issubclass(c, Attribute) and
-                c is not Attribute
+                    inspect.isclass(c) and issubclass(c, Attribute) and
+                    c is not Attribute
             )
         )
 

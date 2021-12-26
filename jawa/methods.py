@@ -1,12 +1,12 @@
-from typing import Optional, Callable, Iterator, IO, List
-from struct import unpack, pack
 from itertools import repeat
+from struct import unpack, pack
+from typing import Optional, Callable, Iterator, IO, List
 
-from jawa.constants import UTF8
-from jawa.util.flags import Flags
-from jawa.util.descriptor import method_descriptor, JVMType
 from jawa.attribute import AttributeTable
 from jawa.attributes.code import CodeAttribute
+from jawa.constants import UTF8
+from jawa.util.descriptor import method_descriptor, JVMType
+from jawa.util.flags import Flags
 
 
 class Method(object):
@@ -126,7 +126,7 @@ class MethodTable(object):
         self._table = [fld for fld in self._table if fld is not method]
 
     def create(self, name: str, descriptor: str,
-               code: CodeAttribute=None) -> Method:
+               code: CodeAttribute = None) -> Method:
         """
         Creates a new method from `name` and `descriptor`. If `code` is not
         ``None``, add a `Code` attribute to this method.
@@ -180,8 +180,8 @@ class MethodTable(object):
         for method in self._table:
             method.pack(out)
 
-    def find(self, *, name: str=None, args: str=None, returns: str=None,
-             f: Callable=None) -> Iterator[Method]:
+    def find(self, *, name: str = None, args: str = None, returns: str = None,
+             f: Callable = None) -> Iterator[Method]:
         """
         Iterates over the methods table, yielding each matching method. Calling
         without any arguments is equivalent to iterating over the table. For

@@ -4,16 +4,16 @@ ClassFile reader & writer.
 The :mod:`jawa.cf` module provides tools for working with JVM ``.class``
 ClassFiles.
 """
-from typing import IO, Iterable, Union, Sequence
-from struct import pack, unpack
 from collections import namedtuple
+from struct import pack, unpack
+from typing import IO, Iterable, Union, Sequence
 
+from jawa.attribute import AttributeTable, ATTRIBUTE_CLASSES
+from jawa.attributes.bootstrap import BootstrapMethod
 from jawa.constants import ConstantPool, ConstantClass
 from jawa.fields import FieldTable
 from jawa.methods import MethodTable
-from jawa.attribute import AttributeTable, ATTRIBUTE_CLASSES
 from jawa.util.flags import Flags
-from jawa.attributes.bootstrap import BootstrapMethod
 
 
 class ClassVersion(namedtuple('ClassVersion', ['major', 'minor'])):
@@ -67,7 +67,7 @@ class ClassFile(object):
     #: The JVM ClassFile magic number.
     MAGIC = 0xCAFEBABE
 
-    def __init__(self, source: IO=None):
+    def __init__(self, source: IO = None):
         # Default to J2SE_7
         self._version = ClassVersion(0x32, 0)
         self._constants = ConstantPool()
@@ -94,7 +94,7 @@ class ClassFile(object):
             self._from_io(source)
 
     @classmethod
-    def create(cls, this: str, super_: str=u'java/lang/Object') -> 'ClassFile':
+    def create(cls, this: str, super_: str = u'java/lang/Object') -> 'ClassFile':
         """
         A utility which sets up reasonable defaults for a new public class.
 

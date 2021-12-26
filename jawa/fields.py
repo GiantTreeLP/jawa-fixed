@@ -1,12 +1,12 @@
-from typing import IO, Callable, Iterator, Optional
-from struct import unpack, pack
 from itertools import repeat
+from struct import unpack, pack
+from typing import IO, Callable, Iterator, Optional
 
-from jawa.util.flags import Flags
 from jawa.attribute import AttributeTable
-from jawa.constants import Constant, UTF8
 from jawa.attributes.constant_value import ConstantValueAttribute
+from jawa.constants import Constant, UTF8
 from jawa.util.descriptor import field_descriptor
+from jawa.util.flags import Flags
 
 
 class Field(object):
@@ -107,7 +107,7 @@ class FieldTable(object):
         """
         self._table = [fld for fld in self._table if fld is not field]
 
-    def create(self, name: str, descriptor: str, value: Constant=None) -> Field:
+    def create(self, name: str, descriptor: str, value: Constant = None) -> Field:
         """
         Creates a new field from `name` and `descriptor`. For example::
 
@@ -182,8 +182,8 @@ class FieldTable(object):
     def __len__(self):
         return len(self._table)
 
-    def find(self, *, name: str=None, type_: str=None,
-             f: Callable=None) -> Iterator[Field]:
+    def find(self, *, name: str = None, type_: str = None,
+             f: Callable = None) -> Iterator[Field]:
         """
         Iterates over the fields table, yielding each matching method. Calling
         without any arguments is equivalent to iterating over the table.
