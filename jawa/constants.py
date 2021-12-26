@@ -1,6 +1,6 @@
 from struct import unpack, pack
 
-from jawa.util.utf import decode_modified_utf8, encode_modified_utf8
+from mutf8 import encode_modified_utf8, decode_modified_utf8
 
 
 class Constant(object):

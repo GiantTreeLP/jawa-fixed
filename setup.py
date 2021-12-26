@@ -29,7 +29,8 @@ setup(
         'Topic :: Software Development :: Assemblers'
     ],
     install_requires=[
-        'click>=5.0'
+        'click>=5.0',
+        'mutf8>=1.0.5'
     ],
     tests_require=[
         'pytest>=2.10',
