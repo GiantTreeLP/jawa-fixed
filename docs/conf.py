@@ -29,12 +29,8 @@ extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.viewcode',
     'sphinx.ext.autosummary',
-    'sphinxcontrib.googleanalytics',
     'sphinx_click.ext'
 ]
-
-# Google Analytics ID
-googleanalytics_id = ''
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -57,7 +53,7 @@ copyright = u'2019, Tyler Kennedy'
 # built documents.
 #
 # The full version, including alpha/beta/rc tags.
-release = '2.3.1-2'
+release = '2.3.1'
 # The short X.Y version.
 version = '.'.join(release.split('.')[:-1])
 

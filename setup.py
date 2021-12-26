@@ -1,13 +1,16 @@
 
 from setuptools import setup, find_packages
 
+with open('README.md', 'r') as f:
+    long_description = f.read()
+
 setup(
     name='jawa-fixed',
     packages=find_packages(),
-    version='2.3.1-2',
+    version='2.3.1',
     python_requires='>=3.8',
     description='Doing fun stuff with JVM ClassFiles.',
-    long_description=open('README.md', 'r').read(),
+    long_description=long_description,
     long_description_content_type='text/markdown',
     maintainer='GiantTree',
     maintainer_email='gianttree@groundmc.net',
@@ -39,7 +42,6 @@ setup(
         'dev': [
             'pytest',
             'sphinx',
-            'sphinxcontrib-googleanalytics',
             'sphinx_rtd_theme',
             'sphinx-click',
             'ghp-import',
