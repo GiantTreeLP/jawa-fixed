@@ -220,7 +220,7 @@ def read_instruction(fio, start_pos):
         pairs = {}
         for _ in repeat(None, npairs):
             match, offset = unpack('>ii', fio.read(8))
-            pairs[match] = offset
+            pairs[match] = Operand(OperandTypes.BRANCH, value=offset)
 
         final_operands.append(pairs)
         final_operands.append(Operand(OperandTypes.BRANCH, default))

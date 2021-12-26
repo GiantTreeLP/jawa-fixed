@@ -1,6 +1,5 @@
 from jawa.util.bytecode import Instruction, Operand, OperandTypes
 
-
 GOOD_TABLE_SWITCH = [
     Instruction(mnemonic='iconst_1', opcode=4, operands=[], pos=0),
     Instruction(mnemonic='tableswitch', opcode=170, operands=[
@@ -24,7 +23,11 @@ GOOD_TABLE_SWITCH = [
 GOOD_LOOKUP_SWITCH = [
     Instruction(mnemonic='iconst_1', opcode=4, operands=[], pos=0),
     Instruction(mnemonic='lookupswitch', opcode=171, operands=[
-        {1: 27, 3: 28},
+        {
+            # Table value - branch target
+            Operand(OperandTypes.LITERAL, value=1): Operand(op_type=OperandTypes.BRANCH, value=27),
+            Operand(OperandTypes.LITERAL, value=3): Operand(op_type=OperandTypes.BRANCH, value=28)
+        },
         Operand(op_type=OperandTypes.BRANCH, value=29)
     ], pos=1),
     Instruction(mnemonic='return', opcode=177, operands=[], pos=28),
