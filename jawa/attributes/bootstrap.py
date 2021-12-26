@@ -41,7 +41,7 @@ class BootstrapMethodsAttribute(Attribute):
             ))
             out.write(pack(
                 '>{0}H'.format(len(table_entry.bootstrap_args)),
-                table_entry.bootstrap_args
+                *table_entry.bootstrap_args
             ))
 
         return out.getvalue()
