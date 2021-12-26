@@ -2,16 +2,17 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='jawa',
+    name='jawa-fixed',
     packages=find_packages(),
-    version='2.2.0',
+    version='2.3.0',
     python_requires='>=3.6',
     description='Doing fun stuff with JVM ClassFiles.',
     long_description=open('README.md', 'r').read(),
     long_description_content_type='text/markdown',
     author='Tyler Kennedy',
     author_email='tk@tkte.ch',
-    url='http://github.com/TkTech/Jawa',
+    maintainer='Marvin K',
+    url='https://github.com/GiantTreeLP/jawa-fixed',
     keywords=[
         'java',
         'disassembly',
@@ -47,7 +48,8 @@ setup(
             'ipython',
             'twine',
             'wheel',
-            'bumpversion'
+            'bumpversion',
+            'flake8'
         ]
     },
     entry_points='''
