@@ -7,7 +7,7 @@ with open('README.md', 'r') as f:
 setup(
     name='jawa-fixed',
     packages=find_packages(),
-    version='2.3.1',
+    version='2.4.0',
     python_requires='>=3.8',
     description='Doing fun stuff with JVM ClassFiles.',
     long_description=long_description,
