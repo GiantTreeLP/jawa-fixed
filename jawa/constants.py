@@ -1,3 +1,4 @@
+import enum
 from struct import unpack, pack
 
 from mutf8 import encode_modified_utf8, decode_modified_utf8
@@ -310,7 +311,6 @@ _constant_types = (
     PackageInfo
 )
 
-
 # The format and size-on-disk of each type of constant
 # in the constant pool.
 _constant_fmts = (
@@ -333,6 +333,17 @@ _constant_fmts = (
     ('>HH', 4)
 )
 
+@enum.unique
+class MethodHandleKind(IntEnum):
+    GET_FIELD = 1
+    GET_STATIC = 2
+    PUT_FIELD = 3
+    PUT_STATIC = 4
+    INVOKE_VIRTUAL = 5
+    INVOKE_STATIC = 6
+    INVOKE_SPECIAL = 7
+    NEW_INVOKE_SPECIAL = 8
+    INVOKE_INTERFACE = 9
 
 class ConstantPool(object):
     def __init__(self):
@@ -534,6 +545,78 @@ class ConstantPool(object):
             11,
             self.create_class(class_).index,
             self.create_name_and_type(if_method, descriptor).index
+        ))
+        return self.get(self.raw_count - 1)
+
+    def create_method_handle(self, kind: MethodHandleKind, class_: str, method: str, descriptor: str) -> MethodHandle:
+        """
+        Creates a new :class:`MethodHandle`, adding it to the pool and
+        returning it.
+
+        :param kind: The kind of method handle.
+        :param class_: The name of the class to which `method` belongs.
+        :param method: The name of the method.
+        :param descriptor: The descriptor for `method`.
+        """
+        self.append((
+            15,
+            kind,
+            self.create_method_ref(class_, method, descriptor).index
+        ))
+        return self.get(self.raw_count - 1)
+
+    def create_method_type(self, descriptor: str) -> MethodType:
+        """
+        Creates a new :class:`MethodType`, adding it to the pool and
+        returning it.
+
+        :param descriptor: The descriptor for the method type.
+        """
+        self.append((
+            16,
+            self.create_utf8(descriptor).index
+        ))
+        return self.get(self.raw_count - 1)
+
+    def create_invoke_dynamic(self, bootstrap_method_attr_index: int, name: str, descriptor: str) -> InvokeDynamic:
+        """
+        Creates a new :class:`InvokeDynamic`, adding it to the pool and
+        returning it.
+
+        :param bootstrap_method_attr_index: The index of the bootstrap method.
+        :param name: The name of the method.
+        :param descriptor: The descriptor for `name`.
+        """
+        self.append((
+            18,
+            bootstrap_method_attr_index,
+            self.create_name_and_type(name, descriptor).index
+        ))
+        return self.get(self.raw_count - 1)
+
+    def create_module(self, name: str) -> Module:
+        """
+        Creates a new :class:`Module`, adding it to the pool and
+        returning it.
+
+        :param name: The name of the module.
+        """
+        self.append((
+            19,
+            self.create_utf8(name).index
+        ))
+        return self.get(self.raw_count - 1)
+
+    def create_package(self, name: str) -> PackageInfo:
+        """
+        Creates a new :class:`PackageInfo`, adding it to the pool and
+        returning it.
+
+        :param name: The name of the package.
+        """
+        self.append((
+            20,
+            self.create_utf8(name).index
         ))
         return self.get(self.raw_count - 1)
 
