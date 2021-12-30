@@ -6,7 +6,7 @@ ClassFiles.
 """
 from collections import namedtuple
 from struct import pack, unpack
-from typing import IO, Iterable, Union, Sequence
+from typing import IO, Iterable, Union, Sequence, List
 
 from jawa.attribute import AttributeTable, ATTRIBUTE_CLASSES
 from jawa.attributes.bootstrap import BootstrapMethod
@@ -228,7 +228,7 @@ class ClassFile(object):
         return [self._constants[idx] for idx in self._interfaces]
 
     @property
-    def bootstrap_methods(self) -> BootstrapMethod:
+    def bootstrap_methods(self) -> List[BootstrapMethod]:
         """
         Returns the bootstrap methods table from the BootstrapMethods attribute,
         if one exists. If it does not, one will be created.
