@@ -1,4 +1,5 @@
 import enum
+from enum import IntEnum
 from struct import unpack, pack
 
 from mutf8 import encode_modified_utf8, decode_modified_utf8
