@@ -2,7 +2,7 @@ import enum
 from enum import IntEnum
 from functools import lru_cache
 from struct import unpack, pack
-from typing import Union
+from typing import Union, List, Tuple
 
 from mutf8 import encode_modified_utf8, decode_modified_utf8
 
@@ -355,7 +355,7 @@ class MethodHandleKind(IntEnum):
 
 
 class ConstantPool(object):
-    _pool: list[Union[None, Constant, tuple[int, ...]]]
+    _pool: List[Union[None, Constant, Tuple[int, ...]]]
 
     def __init__(self):
         self._pool = [None]
