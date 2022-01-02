@@ -1,6 +1,8 @@
 import enum
 from enum import IntEnum
+from functools import lru_cache
 from struct import unpack, pack
+from typing import Union
 
 from mutf8 import encode_modified_utf8, decode_modified_utf8
 
@@ -41,6 +43,7 @@ class UTF8(Constant):
         super().__init__(pool, index)
         self.value = value
 
+    @lru_cache(maxsize=100)
     def pack(self):
         encoded_value = encode_modified_utf8(self.value)
         return pack('>BH', self.TAG, len(encoded_value)) + encoded_value
@@ -50,6 +53,9 @@ class UTF8(Constant):
 
     def __eq__(self, other):
         return other == self.value
+
+    def __hash__(self):
+        return hash(self.value)
 
 
 class Integer(Number):
@@ -334,6 +340,7 @@ _constant_fmts = (
     ('>HH', 4)
 )
 
+
 @enum.unique
 class MethodHandleKind(IntEnum):
     GET_FIELD = 1
@@ -346,7 +353,10 @@ class MethodHandleKind(IntEnum):
     NEW_INVOKE_SPECIAL = 8
     INVOKE_INTERFACE = 9
 
+
 class ConstantPool(object):
+    _pool: list[Union[None, Constant, tuple[int, ...]]]
+
     def __init__(self):
         self._pool = [None]
 
@@ -367,7 +377,7 @@ class ConstantPool(object):
         does not exist.
         """
         constant = self._pool[index]
-        if not isinstance(constant, Constant):
+        if constant is not None and not isinstance(constant, Constant):
             constant = _constant_types[constant[0]](self, index, *constant[1:])
             self._pool[index] = constant
         return constant
